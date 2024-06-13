@@ -1,6 +1,5 @@
 # Block Settings
 
-
 Proof of concept of a `register_block_setting()` function to quickly add settings fields to blocks with just PHP.
 
 ## Usage
@@ -32,14 +31,20 @@ Proof of concept of a `register_block_setting()` function to quickly add setting
 
 The selected value will be added as a className to the block and saved as an attribute in the block's JSON data:
 
+```html
+<div class="wp-block-button block-style-outline">
+	...
+</div>
+```
+
 ```json
 {
 	"prefixButtonStyle": "block-style-outline"
 }
 ```
 
-### Future ideas would include
+## Potential next steps...
 
-- Support for more field types?
+- Support for more field types or at least a multiselect
 - optional render_block attribute to modify the block
-- some sort of register_block_style support or inline CSS built in?
+- some sort of register_block_style support or inline CSS built in
