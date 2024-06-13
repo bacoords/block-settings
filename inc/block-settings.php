@@ -1,12 +1,12 @@
 <?php
-
+/**
+ * Block Settings
+ *
+ * @package wpdev
+ */
 
 /**
- * Registers the block using the metadata loaded from the `block.json` file.
- * Behind the scenes, it registers also all assets so they can be enqueued
- * through the block editor in the corresponding context.
- *
- * @see https://developer.wordpress.org/reference/functions/register_block_type/
+ * Enqueue Block Settings
  */
 function wpdev_block_settings_enqueue() {
 	$asset_file = include WPDEV_BLOCK_SETTINGS_PATH . '/build/index.asset.php';
@@ -28,6 +28,13 @@ function wpdev_block_settings_enqueue() {
 	);
 
 	wp_enqueue_script( 'wpdev-block-settings' );
+
+	wp_enqueue_style(
+		'wpdev-block-settings',
+		WPDEV_BLOCK_SETTINGS_URL . '/build/style-index.css',
+		array(),
+		$asset_file['version']
+	);
 }
 add_action( 'enqueue_block_editor_assets', 'wpdev_block_settings_enqueue' );
 
@@ -36,7 +43,7 @@ add_action( 'enqueue_block_editor_assets', 'wpdev_block_settings_enqueue' );
 /**
  * Register Block Settings
  *
- * @param array $settings_array
+ * @param array $new_settings  The settings array.
  * @return void
  */
 function wpdev_register_block_setting( $new_settings ) {
@@ -49,3 +56,27 @@ function wpdev_register_block_setting( $new_settings ) {
 		}
 	);
 }
+
+
+/**
+ * Add default settings to block settings.
+ *
+ * @param array $settings The block settings.
+ * @return array
+ */
+function wpdev_add_defaults_to_block_settings( $settings ) {
+	$default_settings = array(
+		'attribute'  => '',
+		'blockTypes' => array(),
+		'label'      => '',
+		'multiple'   => false,
+		'options'    => array(),
+	);
+
+	foreach ( $settings as $key => $setting ) {
+		$settings[ $key ] = wp_parse_args( $setting, $default_settings );
+	}
+
+	return $settings;
+}
+add_filter( 'wpdev_block_settings', 'wpdev_add_defaults_to_block_settings', 99 );

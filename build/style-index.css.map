@@ -1,0 +1,1 @@
+{"version":3,"file":"./style-index.css","mappings":";;;AACC;EACC;AAAF,C","sources":["webpack://block-settings/./src/style.scss"],"sourcesContent":[".wpdev-block-settings-panel {\n\t.components-base-control.components-checkbox-control {\n\t\tmargin-bottom: 6px;\n\t}\n}\n"],"names":[],"sourceRoot":""}

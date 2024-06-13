@@ -1,17 +1,19 @@
 import { addFilter } from "@wordpress/hooks";
 import { createHigherOrderComponent } from "@wordpress/compose";
 
-import { SelectControl, PanelBody, PanelRow } from "@wordpress/components";
+import {
+	SelectControl,
+	CheckboxControl,
+	PanelBody,
+	PanelRow,
+	__experimentalVStack as VStack,
+} from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 import { __ } from "@wordpress/i18n";
 
 import classnames from "classnames";
 
-/**
- * additional block attributes object
- */
-
-console.log(wpdev_block_settings, wpdev_block_settings.settings);
+import "./style.scss";
 
 const settingsArray = wpdev_block_settings.settings;
 
@@ -34,7 +36,7 @@ addFilter(
 
 		blockSettings.forEach((setting) => {
 			settings.attributes[setting.attribute] = {
-				type: "string",
+				type: setting.multiple ? "array" : "string",
 				default: "",
 			};
 		});
@@ -58,20 +60,55 @@ function Edit(props) {
 
 	return (
 		<InspectorControls>
-			<PanelBody title={__("Block Settings")}>
+			<PanelBody
+				title={__("Block Settings")}
+				className="wpdev-block-settings-panel"
+			>
 				{blockSettings.map((setting) => {
 					return (
 						<PanelRow key={setting.attribute}>
-							<SelectControl
-								label={setting.label}
-								value={props.attributes[setting.attribute]}
-								options={setting.options}
-								onChange={(value) => {
-									props.setAttributes({
-										[setting.attribute]: value,
-									});
-								}}
-							/>
+							{!setting.multiple && (
+								<SelectControl
+									label={setting.label}
+									labelPosition="side"
+									value={props.attributes[setting.attribute]}
+									options={setting.options}
+									onChange={(value) => {
+										props.setAttributes({
+											[setting.attribute]: value,
+										});
+									}}
+								/>
+							)}
+							{setting.multiple && (
+								<>
+									<VStack spacing={0}>
+										{setting.options.map((option) => {
+											return (
+												<CheckboxControl
+													key={option.value}
+													label={option.label}
+													checked={props.attributes[setting.attribute].includes(
+														option.value,
+													)}
+													__nextHasNoMarginBottom
+													onChange={(value) => {
+														const currentValue =
+															props.attributes[setting.attribute];
+														const newValue = currentValue.includes(option.value)
+															? currentValue.filter((v) => v !== option.value)
+															: [...currentValue, option.value];
+
+														props.setAttributes({
+															[setting.attribute]: newValue,
+														});
+													}}
+												/>
+											);
+										})}
+									</VStack>
+								</>
+							)}
 						</PanelRow>
 					);
 				})}
@@ -99,7 +136,13 @@ const classNameGenerator = (attributes, setting) => {
 	const classNames = [];
 
 	if (attributes[setting.attribute]) {
-		classNames.push(attributes[setting.attribute]);
+		if (Array.isArray(attributes[setting.attribute])) {
+			attributes[setting.attribute].forEach((value) => {
+				classNames.push(value);
+			});
+		} else {
+			classNames.push(attributes[setting.attribute]);
+		}
 	}
 
 	return classNames.join(" ");

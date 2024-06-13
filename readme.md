@@ -11,6 +11,7 @@ Proof of concept of a `register_block_setting()` function to quickly add setting
 			'attribute'  => 'prefixButtonStyle',
 			'blockTypes' => array( 'core/button' ),
 			'label'      => 'Select Button Style',
+			'multiple'   => false,
 			'options'    => array(
 				array(
 					'value' => '',
@@ -42,6 +43,19 @@ The selected value will be added as a className to the block and saved as an att
 	"prefixButtonStyle": "block-style-outline"
 }
 ```
+
+## Multiple values support
+
+If you set `multiple` to true, your options will be rendered as checkboxes instead of a select dropdown. The selected values will be saved as an array in the block's JSON data:
+
+```json
+{
+	"prefixButtonStyle": [ "block-style-outline", "block-style-solid" ]
+}
+```
+
+This is also useful even if there's only one option but you want a checkbox/boolean behavior.
+
 
 ## Potential next steps...
 
