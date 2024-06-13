@@ -58,7 +58,5 @@ This is also useful even if there's only one option but you want a checkbox/bool
 
 
 ## Potential next steps...
-
-- Support for more field types or at least a multiselect
-- optional render_block attribute to modify the block
-- some sort of register_block_style support or inline CSS built in
+- optional render_block attribute to enable modifying the block markup in one palce
+- some sort of conditional register_block_style support or inline CSS built in?
