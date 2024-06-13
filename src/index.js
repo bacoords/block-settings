@@ -83,6 +83,9 @@ function Edit(props) {
 							{setting.multiple && (
 								<>
 									<VStack spacing={0}>
+										<label className="wpdev-block-settings-panel__label">
+											{setting.label}
+										</label>
 										{setting.options.map((option) => {
 											return (
 												<CheckboxControl

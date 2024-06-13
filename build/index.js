@@ -79,9 +79,12 @@ function Edit(props) {
               });
             }
           }), setting.multiple && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalVStack, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalVStack, {
               spacing: 0,
-              children: setting.options.map(option => {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("label", {
+                className: "wpdev-block-settings-panel__label",
+                children: setting.label
+              }), setting.options.map(option => {
                 return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.CheckboxControl, {
                   label: option.label,
                   checked: props.attributes[setting.attribute].includes(option.value),
@@ -94,7 +97,7 @@ function Edit(props) {
                     });
                   }
                 }, option.value);
-              })
+              })]
             })
           })]
         }, setting.attribute);
