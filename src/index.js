@@ -70,7 +70,7 @@ function Edit(props) {
 							{!setting.multiple && (
 								<SelectControl
 									label={setting.label}
-									labelPosition="side"
+									className="wpdev-block-settings-panel__select"
 									value={props.attributes[setting.attribute]}
 									options={setting.options}
 									onChange={(value) => {

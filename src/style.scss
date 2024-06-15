@@ -1,4 +1,7 @@
 .wpdev-block-settings-panel {
+	.components-base-control {
+		width: 100%;
+	}
 	.components-base-control.components-checkbox-control {
 		margin-bottom: 6px;
 	}
@@ -15,6 +18,10 @@
 		display: inline-block;
 		margin-bottom: calc(8px);
 		padding: 0px;
+		width: 100%;
+	}
+
+	&__select {
 		width: 100%;
 	}
 }
