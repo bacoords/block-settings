@@ -71,7 +71,13 @@ function wpdev_add_defaults_to_block_settings( $settings ) {
 		'label'      => '',
 		'multiple'   => false,
 		'options'    => array(),
+		'field'      => 'select', // Not functional yet.
+		'help'       => '',
 	);
+
+	if ( $default_settings['multiple'] && 'select' === $default_settings['field'] ) {
+		$default_settings['field'] = 'checkbox';
+	}
 
 	foreach ( $settings as $key => $setting ) {
 		$settings[ $key ] = wp_parse_args( $setting, $default_settings );

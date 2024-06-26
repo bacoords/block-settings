@@ -78,6 +78,7 @@ function Edit(props) {
 											[setting.attribute]: value,
 										});
 									}}
+									help={setting.help}
 								/>
 							)}
 							{setting.multiple && (
@@ -109,6 +110,11 @@ function Edit(props) {
 												/>
 											);
 										})}
+										{setting.help && (
+											<p className="wpdev-block-settings-panel__help">
+												{setting.help}
+											</p>
+										)}
 									</VStack>
 								</>
 							)}

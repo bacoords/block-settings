@@ -77,7 +77,8 @@ function Edit(props) {
               props.setAttributes({
                 [setting.attribute]: value
               });
-            }
+            },
+            help: setting.help
           }), setting.multiple && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalVStack, {
               spacing: 0,
@@ -97,6 +98,9 @@ function Edit(props) {
                     });
                   }
                 }, option.value);
+              }), setting.help && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
+                className: "wpdev-block-settings-panel__help",
+                children: setting.help
               })]
             })
           })]

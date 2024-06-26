@@ -26,6 +26,7 @@ Proof of concept of a `register_block_setting()` function to quickly add setting
 					'label' => 'Solid',
 				),
 			),
+			'help'       => 'Select a style for the button.',
 		),
 	);
 ```
@@ -47,7 +48,7 @@ The selected value will be added as a className to the block and saved as an att
 
 ## Multiple values support
 
-If you set `multiple` to true, your options will be rendered as checkboxes instead of a select dropdown. 
+If you set `multiple` to true, your options will be rendered as checkboxes instead of a select dropdown.
 
 <img width="976" alt="Xnapper-2024-06-13-15 40 02" src="https://github.com/bacoords/block-settings/assets/6867360/ee67526a-8497-46bd-a25c-bafaade96d93">
 
